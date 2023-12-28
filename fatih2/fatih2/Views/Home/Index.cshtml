@@ -1,0 +1,49 @@
+﻿@model IEnumerable<fatih2.Models.ProductionEntry>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tablo 3 Hesaplama</title>
+</head>
+<body>
+    <h2>Üretim Operasyon Bildirimleri</h2>
+
+    <button onclick="calculateTable()">Tabloyu Hesapla</button>
+
+    <div id="tableContainer">
+        <table border="1" id="resultTable">
+            <tr>
+                <th>Kayıt No</th>
+                <th>Başlangıç</th>
+                <th>Bitiş</th>
+                <th>Toplam Süre (Saat)</th>
+                <th>Statü</th>
+                <th>Duruş Nedeni</th>
+            </tr>
+            @foreach (var entry in ViewBag.Tablo3Output)
+            {
+                <tr>
+                    <td>@entry.KayitNo</td>
+                    <td>@entry.Baslangic.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                    <td>@entry.Bitis.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                    <td>@entry.ToplamSure.ToString(@"hh\:mm\:ss")</td>
+                    <td>@entry.Statu</td>
+                    <td>@entry.DurusNedeni</td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <script>
+        function calculateTable() {
+            
+            var tableContainer = document.getElementById("tableContainer");
+            tableContainer.innerHTML = "";
+
+            var resultTable = document.getElementById("resultTable");
+            var newTable = resultTable.cloneNode(true);
+            tableContainer.appendChild(newTable);
+        }
+    </script>
+</body>
+</html>
